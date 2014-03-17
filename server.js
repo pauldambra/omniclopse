@@ -1,8 +1,9 @@
-var app = require('express')();
-var viewEngine  = require('express3-handlebars');
+var express = require('express');
+var app = express();
+var exp3hbs  = require('express3-handlebars');
 
 app.use('/libs', express.static(__dirname + '/bower_components'));
-app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.engine('handlebars', exp3hbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
 app.get('/', function(req, res){
