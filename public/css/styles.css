@@ -1,0 +1,13 @@
+.carousel {
+  max-width: 900px;
+  margin: 0 auto;
+  height: 300px; }
+  .carousel .carousel-caption h1, .carousel .carousel-caption p {
+    color: white;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000; }
+  .carousel .carousel-inner .item img {
+    width: 900px;
+    max-width: 900px;
+    overflow: hidden;
+    height: 300px;
+    max-height: 300px; }
