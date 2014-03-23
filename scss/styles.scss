@@ -1,3 +1,18 @@
+@import 'colors';
+@import 'navbar';
+
+body>header {
+	height:11.6em;
+}
+
+#main {
+	@include background-opacity($primaryLightTwo, 0.5);
+}
+
+#carousel-wrapper {
+	margin:0;
+}
+
 .carousel {
 	max-width: 900px; margin: 0 auto;
 	height: 300px;
@@ -22,5 +37,31 @@
 	}
 		}
 	}
+}
+.row.info {
+	margin-left:0;
+	margin-right:0;
+	margin-top:20px;
+}
 
+.panel-info {
+	border-color: $complementaryLightTwo;
+	min-height: auto;
+	@media (min-width: 992px) {
+		min-height:600px;
+	}
+	.panel-heading {
+		background-color: $complementaryLightTwo;
+		border-color: $complementaryLightTwo;
+		color: $primaryLightTwo;
+	}
+}
+
+.info-column {
+	border: 1px solid $complementary;
+	border-radius: 4px;
+	min-height: 530px;
+	h1 {
+		background-color: $complementary;
+	}
 }

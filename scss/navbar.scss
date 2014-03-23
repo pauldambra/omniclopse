@@ -1,0 +1,47 @@
+@import 'colors';
+
+@mixin navLinkStyle {
+	a {
+		color:white;
+		background-color: $primary;
+		&:hover, &:focus {
+			background-color: $primaryLightOne;
+		}
+	}
+}
+
+#brand {
+	width: 125px;
+	border-radius: 15px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+button.navbar-toggle {
+	background-color: $primaryLightOne;
+	.icon-bar {
+		background-color: $primary;
+	}
+}
+
+.navbar {
+	border-radius: 0;
+	background-color: $primary;
+	z-index: 9999;
+	.nav {
+		.open {
+			@include navLinkStyle;
+		}
+		li  {
+			.open {
+				background-color: $primaryLightOne;
+			}
+			@include navLinkStyle;
+			.dropdown-menu {
+				background-color: $primary;
+				-webkit-box-shadow: 0 6px 12px rgba(143,143,63,.5);
+				box-shadow: 0 6px 12px rgba(143,143,63,.5);
+			}
+		}
+	}
+}

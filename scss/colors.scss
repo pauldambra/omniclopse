@@ -1,0 +1,28 @@
+$primaryDarkOne: #8f8f3f;
+$primaryDarkTwo: #7d7d40;
+$primary: #767627;
+$primaryLightOne: #abab57;
+$primaryLightTwo: #abab61;
+
+$secondaryADarkOne: #367433;
+$secondaryADarkTwo: #366534;
+$secondaryAMain: #235F1F;
+$secondaryALightOne: #50964d;
+$secondaryALightTwo: #589655;
+
+$secondaryBDarkOne: #8e3e40;
+$secondaryBDarkTwo: #7c3f41;
+$secondaryBMain: #752729;
+$secondaryBLightOne: #aa5759;
+$secondaryBLightTwo: #aa6062;
+
+$complementaryDarkOne: rgb(70,45,83);
+$complementaryDarkTwo: rgb(61,28,79);
+$complementary: rgb(77,45,95);
+$complementaryLightOne: rgb(113,73,115);
+$complementaryLightTwo: rgb(116,80,115);
+
+@mixin background-opacity($color, $opacity: 0.3) {
+    background: $color; /* The Fallback */
+    background: rgba($color, $opacity);
+}

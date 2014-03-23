@@ -1,3 +1,46 @@
+#brand {
+  width: 125px;
+  border-radius: 15px;
+  margin-top: 10px;
+  margin-bottom: 10px; }
+
+button.navbar-toggle {
+  background-color: #abab57; }
+  button.navbar-toggle .icon-bar {
+    background-color: #767627; }
+
+.navbar {
+  border-radius: 0;
+  background-color: #767627;
+  z-index: 9999; }
+  .navbar .nav .open a {
+    color: white;
+    background-color: #767627; }
+    .navbar .nav .open a:hover, .navbar .nav .open a:focus {
+      background-color: #abab57; }
+  .navbar .nav li .open {
+    background-color: #abab57; }
+  .navbar .nav li a {
+    color: white;
+    background-color: #767627; }
+    .navbar .nav li a:hover, .navbar .nav li a:focus {
+      background-color: #abab57; }
+  .navbar .nav li .dropdown-menu {
+    background-color: #767627;
+    -webkit-box-shadow: 0 6px 12px rgba(143, 143, 63, 0.5);
+    box-shadow: 0 6px 12px rgba(143, 143, 63, 0.5); }
+
+body > header {
+  height: 11.6em; }
+
+#main {
+  background: #abab61;
+  /* The Fallback */
+  background: rgba(171, 171, 97, 0.5); }
+
+#carousel-wrapper {
+  margin: 0; }
+
 .carousel {
   max-width: 900px;
   margin: 0 auto;
@@ -11,3 +54,26 @@
     overflow: hidden;
     height: 300px;
     max-height: 300px; }
+
+.row.info {
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 20px; }
+
+.panel-info {
+  border-color: #745073;
+  min-height: auto; }
+  @media (min-width: 992px) {
+    .panel-info {
+      min-height: 600px; } }
+  .panel-info .panel-heading {
+    background-color: #745073;
+    border-color: #745073;
+    color: #abab61; }
+
+.info-column {
+  border: 1px solid #4d2d5f;
+  border-radius: 4px;
+  min-height: 530px; }
+  .info-column h1 {
+    background-color: #4d2d5f; }

@@ -1,0 +1,31 @@
+#brand {
+  width: 125px;
+  border-radius: 15px;
+  margin-top: 10px;
+  margin-bottom: 10px; }
+
+button.navbar-toggle {
+  background-color: #abab57; }
+  button.navbar-toggle .icon-bar {
+    background-color: #767627; }
+
+.navbar {
+  border-radius: 0;
+  background-color: #767627;
+  z-index: 9999; }
+  .navbar .nav .open a {
+    color: white;
+    background-color: #767627; }
+    .navbar .nav .open a:hover, .navbar .nav .open a:focus {
+      background-color: #abab57; }
+  .navbar .nav li .open {
+    background-color: #abab57; }
+  .navbar .nav li a {
+    color: white;
+    background-color: #767627; }
+    .navbar .nav li a:hover, .navbar .nav li a:focus {
+      background-color: #abab57; }
+  .navbar .nav li .dropdown-menu {
+    background-color: #767627;
+    -webkit-box-shadow: 0 6px 12px rgba(143, 143, 63, 0.5);
+    box-shadow: 0 6px 12px rgba(143, 143, 63, 0.5); }
