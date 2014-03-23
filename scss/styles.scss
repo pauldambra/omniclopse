@@ -5,6 +5,12 @@ body>header {
 	height:11.6em;
 }
 
+body>footer {
+	height:11.6em;
+	color:white;
+	background-color: $primary;
+}
+
 #main {
 	@include background-opacity($primaryLightTwo, 0.5);
 }
