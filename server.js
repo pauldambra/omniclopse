@@ -11,6 +11,6 @@ app.get('/', function(req, res){
   res.render('home');
 });
 
-app.listen(1337);
+app.listen(process.env.PORT || 1337);
 
 exports.app = app;
