@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="homepageSpec"
+             errors="0"
+             failures="0"
+             tests="undefined">
+  
+  <testsuite errors="0" failures="0" hostname="" id=""
+    name="Test the home page" package="homepageSpec" skipped="0" 
+    tests="3" time="" timestamp="">
+    
+    
+      <testcase name="Element &lt;body&gt; was visible after 226 milliseconds.">
+        
+      </testcase>  
+    
+      <testcase name="Testing if element &lt;#homeCarousel&gt; is present.">
+        
+      </testcase>  
+    
+      <testcase name="Testing if element &lt;#homeCarousel .item img&gt; is present.">
+        
+      </testcase>  
+    
+    
+    </testsuite>
+  
+</testsuites>
