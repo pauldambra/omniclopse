@@ -3,9 +3,13 @@ module.exports = {
     browser
       .url("http://omniclopse-v0-1.herokuapp.com/")
       .waitForElementVisible('body', 1000)
-      .assert.elementPresent('#homeCarousel')
-      //must have at least one image
-      .assert.elementPresent('#homeCarousel .item img')
+      .assert.elementPresent('header img#brand')
+      .assert.elementPresent('header .navbar')
+      .assert.elementPresent('header .navbar li a')
+      .assert.elementPresent('.carousel')
+      .assert.elementPresent('.carousel .item img')
+      .assert.elementPresent('.row.info')
+      .assert.elementPresent('.row.info .panel')
       .end();
   }
 };
