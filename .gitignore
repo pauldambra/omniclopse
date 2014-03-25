@@ -19,5 +19,7 @@ coverage
 # Compiled binary addons (http://nodejs.org/api/addons.html)
 build/Release
 
-#hide the settings file
+#nightwatch
+#hide the settings file and outputs
 end-to-end-tests/settings.json
+tests_output
