@@ -30,10 +30,10 @@ button.navbar-toggle {
     -webkit-box-shadow: 0 6px 12px rgba(143, 143, 63, 0.5);
     box-shadow: 0 6px 12px rgba(143, 143, 63, 0.5); }
 
-body > header {
+body header {
   height: 11.6em; }
 
-body > footer {
+body footer {
   height: 11.6em;
   color: white;
   background-color: #767627; }

@@ -1,11 +1,11 @@
 @import 'colors';
 @import 'navbar';
 
-body>header {
+body header {
 	height:11.6em;
 }
 
-body>footer {
+body footer {
 	height:11.6em;
 	color:white;
 	background-color: $primary;
