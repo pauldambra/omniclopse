@@ -16,7 +16,6 @@
     <![endif]-->
 </head>
 <body class="container">
-<script type="text/x-handlebars">
 	<header>
 		<div class="row">
 			<a href="/">
@@ -71,8 +70,7 @@
 		</div>
 	</header>
 
-	<section id="main" class="row">
-		{{outlet}}
+	<section id="main" class="row" ng-view>
 	</section>
 
     <footer class="row">
@@ -81,10 +79,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
     <script src="/libs/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="/libs/handlebars/handlebars.js"></script>
-    <script src="/libs/ember/ember.js"></script>
-    <!--<script src="/libs/ember-data/ember-data.js"></script>-->
-	
+    	
 	<script src="/js/templates.js"></script>
     <script src="/js/app.js"></script>
 </body>
