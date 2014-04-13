@@ -2,7 +2,11 @@ var express = require('express');
 var app = express();
 var partials = require('express-partials');
 var mongojs = require('mongojs');
-var db = mongojs('omniclopse', ['pages']);
+
+var dbName = process.env.NODE_ENV === 'test' ? 'omnitest' : 'omniclopse';
+console.log('using db: '+dbName);
+
+var db = mongojs(dbName, ['pages']);
 
 app.use('/libs', express.static(__dirname + '/bower_components'));
 app.use(express.static(__dirname + '/public'));
@@ -24,7 +28,7 @@ app.get('/', function(req, res){
 });
 
 app.get('/admin', function(req, res) {
-	res.render('admin', {layout:false});
+    res.render('admin', {layout:false});
 });
 
 app.listen(process.env.PORT || 1337);

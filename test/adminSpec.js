@@ -1,5 +1,12 @@
 var request = require('supertest');
-var server = require('../server').app;
+var server;
+
+beforeEach(function() {
+    process.env.NODE_ENV = 'test';  
+    //server = proxyquire('./../server', { 'mongojs': dbStub }).app;
+    //everything works fine if I use the below
+    server = require('../server').app;
+});
 
 describe('GET /admin', function(){
   it('respond with html', function(done){
