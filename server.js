@@ -14,10 +14,10 @@ app.use(partials());
 
 app.set('view engine', 'ejs');
 
-app.get('/', function(req, res){
+app.get('/', function(req, res, next) {
     db.pages.findOne({ name: 'home' }, function(err, doc) {
         if (err) {
-            res.render('500', {error: err});
+            next(err);
         } 
         if (doc) {
             res.render('home', doc);
@@ -31,6 +31,9 @@ app.get('/admin', function(req, res) {
     res.render('admin', {layout:false});
 });
 
+app.use(function(err, req, res, next){
+  res.render('500');
+});
 app.listen(process.env.PORT || 1337);
 
 exports.app = app;
