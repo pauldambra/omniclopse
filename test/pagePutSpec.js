@@ -5,6 +5,7 @@ var server;
 var db;
 
 beforeEach(function() {
+    //set environment to test and init things
     process.env.NODE_ENV = 'test'; 
     db = require('../server/db');
     server = require('../server').app;
@@ -19,13 +20,12 @@ describe('PUTing pages', function() {
           .expect(400, done);
     });
 
-    describe('with new name', function(){
+    describe('with a new page name', function(){
       beforeEach(function() {
-        //delete so we know it's new
         db.pages.remove({}, false, function(err, doc) {});
       });
 
-      it('respond with 201 status', function(done){
+      it('should respond with 201 status', function(done){
         request(server)
           .put('/pages/newPage')
           .send({name:'newPage', url:'/somewhere'})
@@ -37,16 +37,16 @@ describe('PUTing pages', function() {
 
     });
 
-    describe('with existing name', function(){
+    describe('with an existing page name', function(){
       beforeEach(function() {
         db.pages.remove({}, false, function(err, doc) {});
         db.pages.insert({name:'existingPage'}, function(err, docs){});
       });
 
-      it('respond with 200 status', function(done){
+      it('should respond with 200 status', function(done){
         request(server)
           .put('/pages/existingPage')
-          .send({name:'existingPage', url:'/somewhere'})
+          .send({name:'existingPage', url:'/somewhereElse'})
           .set('Accept', 'text/json')
           .expect('Content-Type', /json/)
           .expect('location', '/somewhere')
