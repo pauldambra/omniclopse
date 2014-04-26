@@ -13,6 +13,7 @@ body footer {
 
 #main {
 	@include background-opacity($primaryLightTwo, 0.5);
+	padding-top:15px;
 }
 
 #carousel-wrapper {

@@ -7,7 +7,7 @@ var db;
 beforeEach(function() {
     //set environment to test and init things
     process.env.NODE_ENV = 'test'; 
-    db = require('../server/db');
+    db = require('../server/db').db;
     server = require('../server').app;
 });
 
@@ -49,7 +49,7 @@ describe('PUTing pages', function() {
           .send({name:'existingPage', url:'/somewhereElse'})
           .set('Accept', 'text/json')
           .expect('Content-Type', /json/)
-          .expect('location', '/somewhere')
+          .expect('location', '/somewhereElse')
           .expect(200, done);
       });
 

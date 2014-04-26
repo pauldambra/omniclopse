@@ -41,7 +41,8 @@ body footer {
 #main {
   background: #abab61;
   /* The Fallback */
-  background: rgba(171, 171, 97, 0.5); }
+  background: rgba(171, 171, 97, 0.5);
+  padding-top: 15px; }
 
 #carousel-wrapper {
   margin: 0; }
