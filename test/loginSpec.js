@@ -14,6 +14,31 @@ beforeEach(function() {
     agent = request.agent(server);
 });
 
+describe('creating users', function() {
+  it('should create a user', function(done) {
+    db.users.remove({username:'test'}, function() {
+      var users = require('../server/users')(db);
+      users.create('test', 'test', function(result) {
+        expect(result).to.equal('user created');
+        db.users.count({username:'test'}, function(err,count) {
+          expect(count).to.equal(1);  
+          done();
+        })
+      });
+    });
+  });
+  it('should not create a duplicate user', function(done) {
+    var users = require('../server/users')(db);
+    users.create('test', 'test', function(result) {
+      expect(result).to.contain('duplicate key error');
+      db.users.count({username:'test'}, function(err,count) {
+        expect(count).to.equal(1);  
+        done();
+      })
+    });
+  });
+})
+
 describe('getting /login',function() {
   it('should send back the login page', function() {
         request(server)
@@ -30,7 +55,7 @@ describe('getting /login',function() {
   it('should follow 302 when login is invalid and show flash');//how?!
 });
 
-describe('posting to /login', function() {
+describe('logging in', function() {
     it('without valid username cannot login', function(done) {
         agent
           .post('/login')
@@ -52,13 +77,52 @@ describe('posting to /login', function() {
           });
     });
     it('with credentials can login', function(done) {
-        agent
-          .post('/login')
-          .send({ username: 'paul', password: 'password' })
-          .end(function(err, res) {
-            expect(res.status).to.equal(302);
-            expect(res.header.location).to.equal('/');
-            done();
+        db.users.remove({username:'test'}, function() {
+          var users = require('../server/users')(db);
+          users.create('test', 'test', function(result) {
+            expect(result).to.equal('user created');
+             agent
+              .post('/login')
+              .send({ username: 'test', password: 'test' })
+              .end(function(err, res) {
+                expect(res.status).to.equal(302);
+                expect(res.header.location).to.equal('/');
+                done();
+              });
           });
+        });
     });
+});
+
+describe('logging out', function() {
+  it('should log out the logged in user', function(done) {
+        db.users.remove({username:'test'}, function() {
+          var users = require('../server/users')(db);
+          users.create('test', 'test', function(result) {
+            expect(result).to.equal('user created');
+             agent
+              .post('/login')
+              .send({ username: 'test', password: 'test' })
+              .end(function(err, res) {
+                agent
+                  .get('/logout')
+                  .expect(302)
+                  .end(function(err,res) {
+                    expect(res.header.location).to.equal('/');
+                    done();
+                  });
+              });
+          });
+        });
+  });
+
+  it('should throw no errors if there is no user logged in', function(done) {
+    agent
+      .get('/logout')
+      .expect(302)
+      .end(function(err,res) {
+        expect(res.header.location).to.equal('/');
+        done();
+      });
+  });
 });

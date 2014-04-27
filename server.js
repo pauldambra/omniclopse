@@ -70,7 +70,6 @@ app.put('/pages/:page', function(req, res, next) {
 });
 
 var extractMessage = function(req) {
-    var message = '';
     var flash = req.flash();
     if (flash && flash.hasOwnProperty('error')) {
         return {flash: flash.error};
