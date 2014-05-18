@@ -15,7 +15,7 @@ beforeEach(function() {
 });
 
 describe('creating users', function() {
-  it('should create a user', function(done) {
+  it('should be possible to create a user', function(done) {
     db.users.remove({username:'test'}, function() {
       var users = require('../server/users')(db);
       users.create('test', 'test', function(result) {
@@ -27,7 +27,7 @@ describe('creating users', function() {
       });
     });
   });
-  it('should not create a duplicate user', function(done) {
+  it('should not be possible to create a duplicate user', function(done) {
     var users = require('../server/users')(db);
     users.create('test', 'test', function(result) {
       expect(result).to.contain('duplicate key error');
@@ -39,7 +39,7 @@ describe('creating users', function() {
   });
 })
 
-describe('getting /login',function() {
+describe('GET request to /login',function() {
   it('should send back the login page', function() {
         request(server)
           .get('/login')
@@ -55,7 +55,7 @@ describe('getting /login',function() {
   it('should follow 302 when login is invalid and show flash');//how?!
 });
 
-describe('logging in', function() {
+describe('logging in by POSTing to /login', function() {
     it('without valid username cannot login', function(done) {
         agent
           .post('/login')
@@ -76,7 +76,7 @@ describe('logging in', function() {
             done();
           });
     });
-    it('with credentials can login', function(done) {
+    it('with valid credentials can login', function(done) {
         db.users.remove({username:'test'}, function() {
           var users = require('../server/users')(db);
           users.create('test', 'test', function(result) {
@@ -94,7 +94,7 @@ describe('logging in', function() {
     });
 });
 
-describe('logging out', function() {
+describe('logging out by GETing /logout', function() {
   it('should log out the logged in user', function(done) {
         db.users.remove({username:'test'}, function() {
           var users = require('../server/users')(db);

@@ -17,7 +17,8 @@
     "passport-local": "^1.0.0",
     "bcrypt": "^0.7.7",
     "nomnom": "^1.6.2",
-    "connect-flash": "^0.1.1"
+    "connect-flash": "^0.1.1",
+    "bluebird": "^1.2.4"
   },
   "devDependencies": {
     "supertest": "^0.9.0",

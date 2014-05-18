@@ -38,6 +38,9 @@ body footer {
   color: white;
   background-color: #767627; }
 
+ul.nav.navbar-nav {
+  width: 100%; }
+
 #main {
   background: #abab61;
   /* The Fallback */

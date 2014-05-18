@@ -11,6 +11,10 @@ body footer {
 	background-color: $primary;
 }
 
+ul.nav.navbar-nav {
+	width:100%
+}
+
 #main {
 	@include background-opacity($primaryLightTwo, 0.5);
 	padding-top:15px;
