@@ -2,7 +2,7 @@
 <div id="homeCarousel" class="carousel slide" data-ride="carousel">
       <!-- Indicators -->
       <ol class="carousel-indicators">
-        <% for(var i=0; i<carouselImages.length; i++) {%>
+        <% for(var i=0; i<page.carouselImages.length; i++) {%>
            <li data-target="#homeCarousel" 
                data-slide-to="<%= i %>" 
                class="<% if(i==2) { %> active<%}%>"
@@ -10,12 +10,12 @@
         <% } %>
       </ol>
       <div class="carousel-inner">
-        <% for(var i=0; i<carouselImages.length; i++) {%>
+        <% for(var i=0; i<page.carouselImages.length; i++) {%>
           <div class="item<% if(i==2) { %> active<%}%>">
-            <img src="<%= carouselImages[i].url %>" alt="<%= carouselImages[i].alt %>">
+            <img src="<%= page.carouselImages[i].url %>" alt="<%= page.carouselImages[i].alt %>">
             <div class="container">
               <div class="carousel-caption">
-                <%= carouselImages[i].caption %>
+                <%= page.carouselImages[i].caption %>
               </div>
             </div>
           </div>
@@ -26,13 +26,13 @@
   </div>
 </div>
   <div class="row info">
-    <% for(var j=0; j<panels.length; j++) {%>
+    <% for(var j=0; j<page.panels.length; j++) {%>
   	<div class="col-md-4"><div class="panel panel-info">
   		<div class="panel-heading">
-        <h1><%= panels[j].title %></h1>
+        <h1><%= page.panels[j].title %></h1>
       </div>
       <div class="panel-body">
-    		<%= panels[j].body %>
+    		<%= page.panels[j].body %>
     </div>
   </div></div>
     <%}%>

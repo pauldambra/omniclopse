@@ -11,6 +11,10 @@ passport.use(login.localStrategy);
 passport.serializeUser(login.serializeUser);
 passport.deserializeUser(login.deserializeUser);
 
+app.locals({
+        user:null
+    });
+
 app.use(express.logger('dev'));     /* 'default', 'short', 'tiny', 'dev' */
 app.use(express.json());
 app.use(express.urlencoded());
@@ -34,6 +38,8 @@ app.get('/', function(req, res, next) {
         if (err) {
             return next(err);
         } 
+        app.locals.user = req.user;
+        console.log(app.locals);
         if (doc) {
             res.render('home', doc);
         } else {

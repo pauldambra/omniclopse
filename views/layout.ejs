@@ -70,7 +70,11 @@
                   </ul>
                 </li>
                 <li class="pull-right">
+                    <% if(user) { %>
+                        <a href="/logout">Logged in as <%= user.username %> - Log out</a>
+                    <% } else { %>
                     <a href="/login">Login</a>
+                    <% } %>
                 </li>
               </ul>
             </div>
