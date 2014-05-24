@@ -1,9 +1,9 @@
 var express = require('express');
 var app = express();
-var partials = require('express-partials');
+
 var passport = require('passport');
 var flash = require('connect-flash');
-
+var exphbs  = require('express3-handlebars');
 var login = require('./server/login');
 var db = require('./server/db').db;
 
@@ -28,18 +28,26 @@ app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use('/libs', express.static(__dirname + '/bower_components'));
 app.use(express.static(__dirname + '/public'));
-app.use(partials());
 app.use(flash());
 
-app.set('view engine', 'ejs');
+var handlebars = exphbs.create({
+    // Specify helpers which are only registered on this instance.
+    helpers: {
+        matchesCarouselStartIndex: function (index) { 
+            return index == 2 ? 'active' : '';
+        }
+    },
+    defaultLayout: 'main'
+});
+app.engine('handlebars', handlebars.engine);
+app.set('view engine', 'handlebars');
 
 app.get('/', function(req, res, next) {
     db.pages.findOne({ name: 'home' }, function(err, doc) {
         if (err) {
             return next(err);
         } 
-        app.locals.user = req.user;
-        console.log(app.locals);
+        app.locals.user = req.user ? req.user.username : undefined;
         if (doc) {
             res.render('home', doc);
         } else {
@@ -105,7 +113,7 @@ app.get('/logout', function(req, res){
 
 app.use(function(err, req, res, next){
     console.log('handling error');
-    console.log(err);
+    console.error(err);
     res.render('500');
 });
 
