@@ -33,8 +33,13 @@ app.use(flash());
 var handlebars = exphbs.create({
     // Specify helpers which are only registered on this instance.
     helpers: {
-        matchesCarouselStartIndex: function (index) { 
+        markActiveWhenMatchesCarouselStartIndex: function (index) { 
             return index == 2 ? 'active' : '';
+        },
+        loginBlock: function (user) {
+            return user
+                ? '<a href="/logout">Logged in as ' + user + ' - Log out</a>'
+                : '<a href="/login">Login</a>'
         }
     },
     defaultLayout: 'main'

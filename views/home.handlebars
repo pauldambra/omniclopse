@@ -5,13 +5,13 @@
         {{#each carouselImages}}
            <li data-target="#homeCarousel" 
                data-slide-to="{{@index}}"
-               class="{{matchesCarouselStartIndex @index}}"
+               class="{{markActiveWhenMatchesCarouselStartIndex @index}}"
                ></li>
         {{/each}}
       </ol>
       <div class="carousel-inner">
         {{#each carouselImages}}
-          <div class="item {{matchesCarouselStartIndex @index}}">
+          <div class="item {{markActiveWhenMatchesCarouselStartIndex @index}}">
             <img src="{{url}}" alt="{{alt}}">
             <div class="container">
               <div class="carousel-caption">
