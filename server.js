@@ -1,6 +1,5 @@
 var express = require('express');
 var app = express();
-
 var passport = require('passport');
 var flash = require('connect-flash');
 var exphbs  = require('express3-handlebars');
@@ -40,10 +39,16 @@ var handlebars = exphbs.create({
             return user
                 ? '<a href="/logout">Logged in as ' + user + ' - Log out</a>'
                 : '<a href="/login">Login</a>'
+        },
+        elementShouldBeEditable: function() {
+            if (app.locals.user) {
+                return "contenteditable=true";
+            }
         }
     },
     defaultLayout: 'main'
 });
+
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
 

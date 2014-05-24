@@ -89,7 +89,10 @@
     <footer class="row">
     </footer>
 
-    <script src="/libs/jquery/jquery.min.js"></script>
+    <script src="/libs/jquery/dist/jquery.min.js"></script>
     <script src="/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    {{#if user}}
+        <script src="/libs/ckeditor/ckeditor.js"></script>
+    {{/if}}
 </body>
 </html>

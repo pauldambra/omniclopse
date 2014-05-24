@@ -1,0 +1,14 @@
+@mixin editorPencil($size) {
+	content: "\270f";
+	font-family: 'Glyphicons Halflings';
+	font-style: normal;
+	font-size: $size;
+}
+
+div[contenteditable]:before {
+	@include editorPencil(1em);
+}
+
+h1[contenteditable]:before {
+	@include editorPencil(0.5em);
+}

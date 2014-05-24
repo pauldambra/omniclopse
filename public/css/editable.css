@@ -1,0 +1,11 @@
+div[contenteditable]:before {
+  content: "\270f";
+  font-family: 'Glyphicons Halflings';
+  font-style: normal;
+  font-size: 1em; }
+
+h1[contenteditable]:before {
+  content: "\270f";
+  font-family: 'Glyphicons Halflings';
+  font-style: normal;
+  font-size: 0.5em; }
