@@ -12,6 +12,7 @@ beforeEach(function() {
 });
 
 describe('PUTing pages', function() {
+    it('should 401 if not logged in');
     it('should 400 when no body', function(done) {
         request(server)
           .put('/pages/newPage')

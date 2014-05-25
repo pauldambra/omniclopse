@@ -36,10 +36,36 @@
   }).on('blur keyup paste', function() { 
     if (before != $(this).html()) { $(this).trigger('change'); }
   });
-  
+
+  var addMessage = function(message, bootstrapType) {
+    var outer = $('<div/>', {
+      class: 'alert alert-dismissable ' + bootstrapType
+    });
+    var button = $('<button/>',{
+      type:'button',
+      class:'close',
+      'data-dismiss':'alert',
+      'aria-hidden':'true',
+    });
+    button.append('&times;');
+    outer.append(button);
+    outer.append(message);
+    $('#messageHolder').append(outer);
+  } 
+
   var timer;
   var editableOnChange = function() {
-    alert('changed')
+    $.ajax({
+      url:'/pages/home',
+      dataType:'json',
+      contentType:'application/json',
+      data:{},
+      type:'put'
+    }).fail(function(xhr,status){
+      addMessage('could not save your changes', 'alert-danger');
+    }).done(function(){
+      addMessage('saved changes', 'alert-success');
+    });
   }
 
   $('*[contenteditable]').on('change', function() {

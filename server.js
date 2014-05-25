@@ -91,7 +91,7 @@ app.get('/', function(req, res, next) {
 app.put('/pages/:page', function(req, res, next) {
     var pageName = req.params.page;
     if(!req.body || Object.getOwnPropertyNames(req.body).length === 0) {
-        return res.json(400, {});
+        return res.json(400, 'must provide a body for the page');
     }
     db.pages.findAndModify({
         query: { name: pageName },
