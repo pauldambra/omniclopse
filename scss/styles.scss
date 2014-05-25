@@ -19,6 +19,7 @@ ul.nav.navbar-nav {
 #main {
 	@include background-opacity($primaryLightTwo, 0.5);
 	padding-top:15px;
+	margin: 0 -15px;
 }
 
 #carousel-wrapper {
