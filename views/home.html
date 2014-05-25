@@ -1,0 +1,51 @@
+<div id="carousel-wrapper" class="row">
+<div id="homeCarousel" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        {{#each carouselImages}}
+           <li data-target="#homeCarousel" 
+               data-slide-to="{{@index}}"
+               class="{{markActiveWhenMatchesCarouselStartIndex @index}}"
+               ></li>
+        {{/each}}
+      </ol>
+      <div class="carousel-inner">
+        {{#each carouselImages}}
+          <div class="item {{markActiveWhenMatchesCarouselStartIndex @index}}">
+            <img src="{{url}}" alt="{{alt}}">
+            <div class="container">
+              <div class="carousel-caption">
+                {{caption}}
+              </div>
+            </div>
+          </div>
+        {{/each}}
+      </div>
+      <a class="left carousel-control" href="#homeCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+      <a class="right carousel-control" href="#homeCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+  </div>
+</div>
+  <div class="row info">
+    {{> threeColumnPanels panels}}
+  </div>
+
+{{#extend "scripts"}}
+  <script>
+  $('*[contenteditable]').on('focus', function() {
+    before = $(this).html();
+  }).on('blur keyup paste', function() { 
+    if (before != $(this).html()) { $(this).trigger('change'); }
+  });
+  
+  var timer;
+  var editableOnChange = function() {
+    alert('changed')
+  }
+
+  $('*[contenteditable]').on('change', function() {
+    clearTimeout(timer);
+    timer = setTimeout(editableOnChange, 500);
+  });
+
+  </script>
+  {{/extend}}

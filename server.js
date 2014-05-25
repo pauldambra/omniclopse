@@ -2,7 +2,7 @@ var express = require('express');
 var app = express();
 var passport = require('passport');
 var flash = require('connect-flash');
-var exphbs  = require('express3-handlebars');
+var hbs = require('hbs');
 var login = require('./server/login');
 var db = require('./server/db').db;
 
@@ -29,28 +29,47 @@ app.use('/libs', express.static(__dirname + '/bower_components'));
 app.use(express.static(__dirname + '/public'));
 app.use(flash());
 
-var handlebars = exphbs.create({
-    // Specify helpers which are only registered on this instance.
-    helpers: {
-        markActiveWhenMatchesCarouselStartIndex: function (index) { 
-            return index == 2 ? 'active' : '';
-        },
-        loginBlock: function (user) {
-            return user
-                ? '<a href="/logout">Logged in as ' + user + ' - Log out</a>'
-                : '<a href="/login">Login</a>'
-        },
-        elementShouldBeEditable: function() {
-            if (app.locals.user) {
-                return "contenteditable=true";
-            }
-        }
-    },
-    defaultLayout: 'main'
+hbs.registerHelper('markActiveWhenMatchesCarouselStartIndex', 
+                    function(index) {
+                        return index == 2 ? 'active' : '';
+                    });
+hbs.registerHelper('loginBlock', 
+                    function(user) {
+                        return user
+                            ? '<a href="/logout">Logged in as ' + user + ' - Log out</a>'
+                            : '<a href="/login">Login</a>';
+                    });
+hbs.registerHelper('elementShouldBeEditable', 
+                    function(user) {
+                        if (app.locals.user) {
+                            return "contenteditable=true";
+                        }
+                    });
+
+var blocks = {};
+
+hbs.registerHelper('extend', function(name, context) {
+    var block = blocks[name];
+    if (!block) {
+        block = blocks[name] = [];
+    }
+
+    block.push(context.fn(this)); // for older versions of handlebars, use block.push(context(this));
 });
 
-app.engine('handlebars', handlebars.engine);
-app.set('view engine', 'handlebars');
+hbs.registerHelper('block', function(name) {
+    var val = (blocks[name] || []).join('\n');
+
+    // clear the block
+    blocks[name] = [];
+    return val;
+});
+
+app.set('view engine', 'html');
+app.set('views', __dirname + '/views');
+hbs.registerPartials(__dirname + '/views/partials');
+app.engine('html', hbs.__express);
+
 
 app.get('/', function(req, res, next) {
     db.pages.findOne({ name: 'home' }, function(err, doc) {
