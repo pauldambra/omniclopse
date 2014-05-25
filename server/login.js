@@ -1,16 +1,12 @@
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var Promise = require('bluebird');
-
-var db = require('./db').db;
-var ObjectId = require('./db').ObjectId;
-
 var bcrypt = require('bcrypt');
+var db = require('./db').db;
 
 var users = Promise.promisifyAll(db.users);
 var compare = Promise.promisify(bcrypt.compare);
 
-// Create a new object, that prototypally inherits from the Error constructor.
 function NoMatchedUserError(message) {
   this.name = "NoMatchedUserError";
   this.message = message || "Incorrect username.";
@@ -26,7 +22,7 @@ module.exports.localStrategy = new LocalStrategy(function(username, password, do
       throw new NoMatchedUserError();
     }
     matchedUser = user;
-    return compare(password, user.password);
+    return compare(password, matchedUser.password);
   };
 
   users.findOneAsync({ username: username })
@@ -43,15 +39,3 @@ module.exports.localStrategy = new LocalStrategy(function(username, password, do
       return done(err);
     });
 });
-
-//only need to serialize the user id
-module.exports.serializeUser = function(user, done) {
-  done(null, user._id);
-};
-
-// used to deserialize the user
-module.exports.deserializeUser = function(id, done) {
-  db.users.findOne({_id:ObjectId(id)}, function(err, user) {
-    done(err, user);
-  });
-};

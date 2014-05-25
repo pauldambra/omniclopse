@@ -5,17 +5,17 @@ var passport = require('passport');
 var hbs = require('hbs');
 var login = require('./server/login');
 var db = require('./server/db').db;
+var users = require('./server/users')(db);
 
 passport.use(login.localStrategy);
-passport.serializeUser(login.serializeUser);
-passport.deserializeUser(login.deserializeUser);
+passport.serializeUser(users.serializeUser);
+passport.deserializeUser(users.deserializeUser);
 
 var app = require('./server/config').initApp(__dirname);
 
 require('./server/handlebars').init(hbs, app.locals);
 hbs.registerPartials(__dirname + '/views/partials');
 app.engine('html', hbs.__express);
-
 
 app.get('/', function(req, res, next) {
     db.pages.findOne({ name: 'home' }, function(err, doc) {

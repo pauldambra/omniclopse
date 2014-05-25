@@ -31,6 +31,14 @@ module.exports = function(db) {
         }).error(function (e) {
             callback(e.message);
         });
+    },
+    serializeUser: function(user, done) {
+      done(null, user._id);
+    },
+    deserializeUser: function(id, done) {
+      db.users.findOne({_id:ObjectId(id)}, function(err, user) {
+        done(err, user);
+      });
     }
   };
 };
