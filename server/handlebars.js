@@ -16,7 +16,21 @@ module.exports.init = function(handlebars, appLocals) {
                                 return "contenteditable=true";
                             }
                         });
-
+    handlebars.registerHelper("debug", function(optionalValue) {
+      console.log("Current Context");
+      console.log("====================");
+      console.log(this);
+     
+      if (optionalValue) {
+        console.log("Value");
+        console.log("====================");
+        console.log(optionalValue);
+      }
+    });
+    handlebars.registerHelper("safeString", function(value) {
+        return new Handlebars.SafeString(value);
+    });
+    //handlebars helper stolen from project examples to allow ASP.net MVC style sections
     var blocks = {};
 
     handlebars.registerHelper('extend', function(name, context) {

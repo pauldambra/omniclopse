@@ -36,7 +36,7 @@ module.exports = function(db) {
       done(null, user._id);
     },
     deserializeUser: function(id, done) {
-      db.users.findOne({_id:ObjectId(id)}, function(err, user) {
+      db.users.findOne({_id:db.ObjectId(id)}, function(err, user) {
         done(err, user);
       });
     }

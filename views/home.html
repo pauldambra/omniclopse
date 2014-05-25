@@ -26,7 +26,9 @@
   </div>
 </div>
   <div class="row info">
-    {{> threeColumnPanels panels}}
+    {{>panel panels.[0]}}
+    {{>panel panels.[1]}}
+    {{>panel panels.[2]}}
   </div>
 
 {{#extend "scripts"}}
@@ -55,12 +57,22 @@
 
   var timer;
   var editableOnChange = function() {
+    var panels = $('.panel').map(function(index, el) {
+      var title = $(el).find('h1');
+      var body = $(el).find('.panel-body');
+      return {
+        title: title ? title.text() : '',
+        body: body? body.html() : ''
+      };
+    }).get();
+
+    var putData = {'panels': panels};
     $.ajax({
       url:'/pages/home',
       dataType:'json',
       contentType:'application/json',
-      data:{},
-      type:'put'
+      data:JSON.stringify(putData),
+      type:'PUT'
     }).fail(function(xhr,status){
       addMessage('could not save your changes', 'alert-danger');
     }).done(function(){
@@ -69,6 +81,7 @@
   }
 
   $('*[contenteditable]').on('change', function() {
+    console.info($(this));
     clearTimeout(timer);
     timer = setTimeout(editableOnChange, 500);
   });

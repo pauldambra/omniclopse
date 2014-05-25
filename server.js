@@ -24,6 +24,7 @@ app.get('/', function(req, res, next) {
         } 
         app.locals.user = req.user ? req.user.username : undefined;
         if (doc) {
+            console.info(doc);
             res.render('home', doc);
         } else {
             res.render('404');
@@ -39,13 +40,17 @@ app.put('/pages/:page', function(req, res, next) {
     if(!req.body || Object.getOwnPropertyNames(req.body).length === 0) {
         return res.json(400, 'must provide a body for the page');
     }
+    var page = req.body;
+    page.name = pageName;
+
     db.pages.findAndModify({
         query: { name: pageName },
-        update: { $set: req.body },
+        update: { $set: page },
         upsert: true,
         new: true
     }, function(err, doc, lastErrorObject) {
         if(err) {
+            console.error(lastErrorObject);
             next(err);
         } else {
             res.location(doc.url || '/');
@@ -87,7 +92,7 @@ app.get('/logout', function(req, res){
 });
 
 app.use(function(err, req, res, next){
-    console.log('handling error');
+    console.error('catching error');
     console.error(err);
     res.render('500');
 });
