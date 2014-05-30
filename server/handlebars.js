@@ -1,36 +1,28 @@
-
 module.exports.init = function(handlebars, appLocals) {
     handlebars.registerHelper('markActiveWhenMatchesCarouselStartIndex', 
                         function(index) {
                             return index == 2 ? 'active' : '';
                         });
+
     handlebars.registerHelper('loginBlock', 
                         function(user) {
                             return user
                                 ? '<a href="/logout">Logged in as ' + user + ' - Log out</a>'
                                 : '<a href="/login">Login</a>';
                         });
+
     handlebars.registerHelper('elementShouldBeEditable', 
-                        function(user) {
+                        function() {
                             if (appLocals.user) {
-                                return "contenteditable=true";
+                                return 'contenteditable=true';
                             }
                         });
-    handlebars.registerHelper("debug", function(optionalValue) {
-      console.log("Current Context");
-      console.log("====================");
-      console.log(this);
-     
-      if (optionalValue) {
-        console.log("Value");
-        console.log("====================");
-        console.log(optionalValue);
-      }
-    });
-    handlebars.registerHelper("safeString", function(value) {
+
+    handlebars.registerHelper('safeString', function(value) {
         return new handlebars.handlebars.SafeString(value);
     });
-    //handlebars helper stolen from project examples to allow ASP.net MVC style sections
+
+    //handlebars helper stolen from hbs project examples to allow ASP.net MVC style sections
     var blocks = {};
 
     handlebars.registerHelper('extend', function(name, context) {
@@ -48,4 +40,4 @@ module.exports.init = function(handlebars, appLocals) {
         blocks[name] = [];
         return val;
     });
-}
+};
