@@ -1,4 +1,4 @@
-var SALT_WORK_FACTOR = 10;
+    var SALT_WORK_FACTOR = 10;
 
 var bcrypt = require('bcrypt');
 var Promise = require('bluebird');
@@ -11,10 +11,11 @@ module.exports = function(db) {
 
   return {
     create: function(username, password, callback) {
-        var hashPassword = function() {
-            return genSalt(SALT_WORK_FACTOR).then(function(salt) {
-                return genHash(password, salt);
-            });
+        var generateSalt = function() {
+            return genSalt(SALT_WORK_FACTOR);
+        }
+        var hashPassword = function(salt) {
+            return genHash(password, salt);
         };
 
         var persistUser = function(hashedPassword) {
@@ -24,13 +25,14 @@ module.exports = function(db) {
             });
         };
 
-        hashPassword()
-        .then(persistUser)
-        .then(function() {
-            callback('user created');
-        }).error(function (e) {
-            callback(e.message);
-        });
+        generateSalt()
+            .then(hashPassword)
+            .then(persistUser)
+            .then(function() {
+                callback('user created');
+            }).error(function (e) {
+                callback(e.message);
+            });
     },
     serializeUser: function(user, done) {
       done(null, user._id);
