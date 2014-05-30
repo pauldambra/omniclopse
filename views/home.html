@@ -40,10 +40,14 @@
     if (before != $(this).html()) { $(this).trigger('change'); }
   });
 
+  function alertTimeout(wait){
+      setTimeout(function(){
+          $('#messageHolder').children('.alert:first-child').alert().alert('close');
+      }, wait);
+  }
+
   var addMessage = function(message, bootstrapType) {
-    $( "#content-editable-message" ).remove();
     var outer = $('<div/>', {
-      id: 'content-editable-message',
       class: 'alert alert-dismissable ' + bootstrapType
     });
     var button = $('<button/>',{
@@ -56,6 +60,7 @@
     outer.append(button);
     outer.append(message);
     $('#messageHolder').append(outer);
+    alertTimeout(3000);
   } 
 
   var timer;
