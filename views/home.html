@@ -89,7 +89,6 @@
   }
 
   $('*[contenteditable]').on('change', function() {
-    console.info($(this));
     clearTimeout(timer);
     timer = setTimeout(editableOnChange, 500);
   });
