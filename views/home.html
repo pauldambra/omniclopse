@@ -41,7 +41,9 @@
   });
 
   var addMessage = function(message, bootstrapType) {
+    $( "#content-editable-message" ).remove();
     var outer = $('<div/>', {
+      id: 'content-editable-message',
       class: 'alert alert-dismissable ' + bootstrapType
     });
     var button = $('<button/>',{
