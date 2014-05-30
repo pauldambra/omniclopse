@@ -28,7 +28,7 @@ module.exports.init = function(handlebars, appLocals) {
       }
     });
     handlebars.registerHelper("safeString", function(value) {
-        return new Handlebars.SafeString(value);
+        return new handlebars.handlebars.SafeString(value);
     });
     //handlebars helper stolen from project examples to allow ASP.net MVC style sections
     var blocks = {};

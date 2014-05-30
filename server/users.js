@@ -39,6 +39,10 @@ module.exports = function(db) {
       db.users.findOne({_id:db.ObjectId(id)}, function(err, user) {
         done(err, user);
       });
+    },
+    ensureAuthenticatedAsJSON: function (req, res, next) {
+      if (req.isAuthenticated()) { return next(); }
+      return res.json(401, 'you must be logged in to save pages');
     }
   };
 };

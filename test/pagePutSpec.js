@@ -12,13 +12,22 @@ beforeEach(function() {
 });
 
 describe('PUTing pages', function() {
-    it('should 401 if not logged in');
-    it('should 400 when no body', function(done) {
-        request(server)
-          .put('/pages/newPage')
-          .set('Accept', 'text/json')
-          .expect('Content-Type', /json/)
-          .expect(400, done);
+  describe('as an anonymous user', function() {
+    it('should 401 if not logged in', function(done) {
+      request(server)
+        .put('/pages/newPage')
+        .set('Accept', 'text/json')
+        .expect('Content-Type', /json/)
+        .expect(401, done);
+    });
+  });
+
+  describe('as a logged in user', function() {
+    var agent = request.agent(server);
+
+    beforeEach(function(done) {
+      agent = request.agent(server);
+      require('./testHelpers.js').getLoggedInAgent(db, server, agent, done);
     });
 
     describe('with a new page name', function(){
@@ -26,8 +35,16 @@ describe('PUTing pages', function() {
         db.pages.remove({}, false, function(err, doc) {});
       });
 
+      it('should 400 when no body', function(done) {
+        agent
+          .put('/pages/newPage')
+          .set('Accept', 'text/json')
+          .expect('Content-Type', /json/)
+          .expect(400, done);
+      });
+
       it('should respond with 201 status', function(done){
-        request(server)
+        agent
           .put('/pages/newPage')
           .send({name:'newPage', url:'/somewhere'})
           .set('Accept', 'text/json')
@@ -44,8 +61,16 @@ describe('PUTing pages', function() {
         db.pages.insert({name:'existingPage'}, function(err, docs){});
       });
 
+      it('should 400 when no body', function(done) {
+          agent
+            .put('/pages/existingPage')
+            .set('Accept', 'text/json')
+            .expect('Content-Type', /json/)
+            .expect(400, done);
+      });
+
       it('should respond with 200 status', function(done){
-        request(server)
+        agent
           .put('/pages/existingPage')
           .send({name:'existingPage', url:'/somewhereElse'})
           .set('Accept', 'text/json')
@@ -53,6 +78,6 @@ describe('PUTing pages', function() {
           .expect('location', '/somewhereElse')
           .expect(200, done);
       });
-
     });
+  });
 });

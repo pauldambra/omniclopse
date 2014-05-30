@@ -15,27 +15,24 @@ NoMatchedUserError.prototype = new Error();
 NoMatchedUserError.prototype.constructor = NoMatchedUserError;
 
 module.exports.localStrategy = new LocalStrategy(function(username, password, done) {
-  var matchedUser;
-
-  var comparePassword = function(user){
+  users.findOneAsync({ username: username }).bind({})
+    .then(function(user){
     if(!user) {
       throw new NoMatchedUserError();
     }
-    matchedUser = user;
-    return compare(password, matchedUser.password);
-  };
-
-  users.findOneAsync({ username: username })
-    .then(comparePassword)
-    .then(function(isMatch) {
-      return isMatch
-        ? done(null, matchedUser)
-        : done(null, false, { message: 'Incorrect password.' });
-    })
-    .catch(NoMatchedUserError, function() {
-      return done(null, false, { message: 'Incorrect username.' });
-    }) 
-    .error(function(err) {
-      return done(err);
-    });
+    this.user = user;
+    return compare(password, this.user.password);
+  })
+  .then(function(passwordsMatch) {
+    return passwordsMatch
+      ? this.user
+      : false;//, { message: 'Incorrect password.' });
+  })
+  .catch(NoMatchedUserError, function() {
+    return false;//, { message: 'Incorrect username.' });
+  }) 
+  .error(function(err) {
+    return err;
+  })
+  .nodeify(done);
 });
