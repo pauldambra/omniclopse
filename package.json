@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha && nightwatch -t end-to-end-tests/* -c end-to-end-tests/settings.json"
   },
   "author": "Paul D'Ambra",
   "license": "ISC",
@@ -27,7 +27,6 @@
     "gulp-sass": "^0.7.1",
     "browserstack-webdriver": "^2.39.2",
     "nightwatch": "^0.4.7",
-    "gulp-ember-handlebars": "~0.6.0",
     "gulp-concat": "~2.2.0",
     "gulp-uglify": "~0.2.1",
     "should": "^3.3.0",
