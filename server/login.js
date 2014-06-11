@@ -22,7 +22,7 @@ module.exports.localStrategy = new LocalStrategy(function(username, password, do
         throw new NoMatchedUserError();
       }
       this[0] = user;
-      return compare(password, this[0].password);
+      return compare(password, user.password);
     })
     .then(function(passwordsMatch) {
       if (!passwordsMatch) {

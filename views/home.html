@@ -1,29 +1,5 @@
 <div id="carousel-wrapper" class="row">
-  <div id="homeCarousel" class="carousel slide" data-ride="carousel">
-      <!-- Indicators -->
-      <ol class="carousel-indicators">
-        {{#each carouselImages}}
-           <li data-target="#homeCarousel" 
-               data-slide-to="{{@index}}"
-               class="{{markActiveWhenMatchesCarouselStartIndex @index}}"
-               ></li>
-        {{/each}}
-      </ol>
-      <div class="carousel-inner">
-        {{#each carouselImages}}
-          <div class="item {{markActiveWhenMatchesCarouselStartIndex @index}}">
-            <img src="{{url}}" alt="{{alt}}">
-            <div class="container">
-              <div class="carousel-caption">
-                {{caption}}
-              </div>
-            </div>
-          </div>
-        {{/each}}
-      </div>
-      <a class="left carousel-control" href="#homeCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
-      <a class="right carousel-control" href="#homeCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
-  </div>
+  {{>carousel}}
 </div>
 
   <div class="row info">
@@ -32,66 +8,10 @@
     {{>panel panels.[2]}}
   </div>
 
-{{#extend "scripts"}}
-  <script>
-  $('*[contenteditable]').on('focus', function() {
-    before = $(this).html();
-  }).on('blur keyup paste', function() { 
-    if (before != $(this).html()) { $(this).trigger('change'); }
-  });
-
-  function alertTimeout(wait){
-      setTimeout(function(){
-          $('#messageHolder').children('.alert:first-child').alert().alert('close');
-      }, wait);
-  }
-
-  var addMessage = function(message, bootstrapType) {
-    var outer = $('<div/>', {
-      class: 'alert alert-dismissable ' + bootstrapType
-    });
-    var button = $('<button/>',{
-      type:'button',
-      class:'close',
-      'data-dismiss':'alert',
-      'aria-hidden':'true',
-    });
-    button.append('&times;');
-    outer.append(button);
-    outer.append(message);
-    $('#messageHolder').append(outer);
-    alertTimeout(3000);
-  } 
-
-  var timer;
-  var editableOnChange = function() {
-    var panels = $('.panel').map(function(index, el) {
-      var title = $(el).find('h1');
-      var body = $(el).find('.panel-body');
-      return {
-        title: title ? title.text() : '',
-        body: body? body.html() : ''
-      };
-    }).get();
-
-    var putData = {'panels': panels};
-    $.ajax({
-      url:'/pages/home',
-      dataType:'json',
-      contentType:'application/json',
-      data:JSON.stringify(putData),
-      type:'PUT'
-    }).fail(function(xhr,status){
-      addMessage('could not save your changes', 'alert-danger');
-    }).done(function(){
-      addMessage('saved changes', 'alert-success');
-    });
-  }
-
-  $('*[contenteditable]').on('change', function() {
-    clearTimeout(timer);
-    timer = setTimeout(editableOnChange, 500);
-  });
-
-  </script>
+{{#if user}}
+  {{#extend "scripts"}}
+    <script>  
+      window.omniclopse.bindEvents();
+    </script>
   {{/extend}}
+{{/if}}
