@@ -31,7 +31,8 @@
     "gulp-uglify": "~0.2.1",
     "should": "^3.3.0",
     "chai": "^1.9.1",
-    "gulp-nodemon": "^1.0.4"
+    "gulp-nodemon": "^1.0.4",
+    "gulp-rimraf": "^0.1.0"
   },
   "repository": {
     "type": "git",
