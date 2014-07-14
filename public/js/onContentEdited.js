@@ -1,3 +1,11 @@
+(function(omniclopse) {
+  'use strict';
+  omniclopse.ux = omniclopse.ux || {};
+  omniclopse.ux.saveContentStarted = function(element) {
+
+  };
+}(window.omniclopse = window.omniclopse || {}));
+
 (function(omniclopse, $) {
     'use strict';
     function alertTimeout(wait){
