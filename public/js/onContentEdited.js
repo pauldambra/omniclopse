@@ -1,38 +1,36 @@
 (function(omniclopse) {
   'use strict';
+
+  var switchIcons = function(element, oldClass, newClass) {
+    element.classList.remove(oldClass);
+    element.classList.add(newClass);
+  };
+
   omniclopse.ux = omniclopse.ux || {};
   omniclopse.ux.saveContentStarted = function(element) {
+    switchIcons(element, 'fa-pencil', 'fa-save');
+  };
 
+  omniclopse.ux.saveContentCompleted = function(element) {
+    switchIcons(element, 'fa-save', 'fa-check');
+    setTimeout(function() {
+      switchIcons(element, 'fa-check', 'fa-pencil');
+    }, 3000);
+  };
+
+  omniclopse.ux.saveContentFailed = function(element) {
+    switchIcons(element, 'fa-save', 'fa-times');
   };
 }(window.omniclopse = window.omniclopse || {}));
 
 (function(omniclopse, $) {
     'use strict';
-    function alertTimeout(wait){
-        setTimeout(function(){
-            $('#messageHolder').children('.alert:first-child').alert().alert('close');
-        }, wait);
-    }
-
-    var addMessage = function(message, bootstrapType) {
-      var outer = $('<div/>', {
-        class: 'alert alert-dismissable ' + bootstrapType
-      });
-      var button = $('<button/>',{
-        type:'button',
-        class:'close',
-        'data-dismiss':'alert',
-        'aria-hidden':'true',
-      });
-      button.append('&times;');
-      outer.append(button);
-      outer.append(message);
-      $('#messageHolder').append(outer);
-      alertTimeout(3000);
-    }; 
-
     
-    omniclopse.onContentEdited = function() {
+    omniclopse.onContentEdited = function(element) {
+      var icon = $(element).find("i")[0];
+      
+      omniclopse.ux.saveContentStarted(icon);
+
       var panels = $('.panel').map(function(index, el) {
         var title = $(el).find('h1');
         var body = $(el).find('.panel-body');
@@ -50,9 +48,9 @@
         data:JSON.stringify(putData),
         type:'PUT'
       }).fail(function(xhr,status){
-        addMessage('could not save your changes', 'alert-danger');
+        omniclopse.ux.saveContentFailed(icon);
       }).done(function(){
-        addMessage('saved changes', 'alert-success');
+        omniclopse.ux.saveContentCompleted(icon);
       });
     };
 

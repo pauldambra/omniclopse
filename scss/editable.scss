@@ -1,20 +1,88 @@
-@mixin editorAffordance($size) {
-	position:absolute;
-    right:0;
-    top:0;
+@import 'colors';
+
+@mixin keyframes($animation-name) {
+  @-webkit-keyframes $animation-name {
+    @content;
+  }
+  @-moz-keyframes $animation-name {
+    @content;
+  }
+  @keyframes $animation-name {
+    @content;
+  }
+}
+
+@mixin animation($str) {
+  -webkit-animation: #{$str};
+  animation: #{$str};
+}
+
+@include keyframes(darkpulse) {
+  0% { 
+	box-shadow: inset 0px 0px 5px rgb(61,28,79),
+		0px 0px 15px rgb(61,28,79); 
+	}
+  50% { 
+  	box-shadow: inset 0px 0px 15px rgb(61,28,79), 
+  		0px 0px 35px rgb(61,28,79); 
+  }
+  100% {  
+  	box-shadow: inset 0px 0px 5px rgb(61,28,79), 
+  		0px 0px 15px rgb(61,28,79); 
+  	}
+}
+
+@include keyframes(goldpulse) {
+  0% { 
+  	box-shadow: inset 0px 0px 5px rgb(255,215,0), 	
+  		0px 0px 15px rgb(255,215,0); 
+  }
+  50% {
+  	box-shadow: inset 0px 0px 25px rgb(255,215,0), 
+  		0px 0px 35px rgb(255,215,0); 
+  }
+  100% {  
+  	box-shadow: inset 0px 0px 5px rgb(255,215,0),
+  		0px 0px 15px rgb(255,215,0); 
+  }
+}
+
+@mixin editorAffordance($size, $pos, $glow) {
+	position: absolute;
+	left: $pos;
+	top: $pos;
+	z-index: 900;
+	color: $glow;
 	font-size: $size;
+	border-radius: 15px;
+	padding: 5px;
+}
+
+i.fa-check {
+	color:green;
+}
+
+[contenteditable] {
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	outline: none;
+	position:relative;
 }
 
 div[contenteditable] {
-	position:relative;
 	.editable-affordance{
-    	@include editorAffordance(1em);
+    	@include editorAffordance(1em, 0, $complementaryDarkTwo);
+    	@include animation('darkpulse 2.5s infinite ease-in');
 	}
 }
 
 h1[contenteditable] {
 	position:relative;
 	.editable-affordance{
-    	@include editorAffordance(0.5em);
+    	@include editorAffordance(0.5em, -0.5em, gold);
+    	@include animation('goldpulse 2.5s infinite ease-in');
 	}
 }

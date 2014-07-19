@@ -36,6 +36,8 @@ app.get('/', function(req, res, next) {
 //rather we're idempotently creating or updating the specific page
 //at /page/foo
 app.put('/pages/:page', users.ensureAuthenticatedAsJSON, function(req, res, next) {
+    setTimeout(function() {
+
     var pageName = req.params.page;
     if(!req.body || Object.getOwnPropertyNames(req.body).length === 0) {
         return res.json(400, 'must provide a body for the page');
@@ -61,6 +63,7 @@ app.put('/pages/:page', users.ensureAuthenticatedAsJSON, function(req, res, next
             }
         }
     });
+    }, 1500);
 });
 
 var extractMessage = function(req) {

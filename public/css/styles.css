@@ -30,21 +30,103 @@ button.navbar-toggle {
     -webkit-box-shadow: 0 6px 12px rgba(143, 143, 63, 0.5);
     box-shadow: 0 6px 12px rgba(143, 143, 63, 0.5); }
 
-div[contenteditable] {
+@-webkit-keyframes darkpulse {
+  0% {
+    box-shadow: inset 0px 0px 5px #3d1c4f, 0px 0px 15px #3d1c4f; }
+
+  50% {
+    box-shadow: inset 0px 0px 15px #3d1c4f, 0px 0px 35px #3d1c4f; }
+
+  100% {
+    box-shadow: inset 0px 0px 5px #3d1c4f, 0px 0px 15px #3d1c4f; } }
+
+@-moz-keyframes darkpulse {
+  0% {
+    box-shadow: inset 0px 0px 5px #3d1c4f, 0px 0px 15px #3d1c4f; }
+
+  50% {
+    box-shadow: inset 0px 0px 15px #3d1c4f, 0px 0px 35px #3d1c4f; }
+
+  100% {
+    box-shadow: inset 0px 0px 5px #3d1c4f, 0px 0px 15px #3d1c4f; } }
+
+@keyframes darkpulse {
+  0% {
+    box-shadow: inset 0px 0px 5px #3d1c4f, 0px 0px 15px #3d1c4f; }
+
+  50% {
+    box-shadow: inset 0px 0px 15px #3d1c4f, 0px 0px 35px #3d1c4f; }
+
+  100% {
+    box-shadow: inset 0px 0px 5px #3d1c4f, 0px 0px 15px #3d1c4f; } }
+
+@-webkit-keyframes goldpulse {
+  0% {
+    box-shadow: inset 0px 0px 5px gold, 0px 0px 15px gold; }
+
+  50% {
+    box-shadow: inset 0px 0px 25px gold, 0px 0px 35px gold; }
+
+  100% {
+    box-shadow: inset 0px 0px 5px gold, 0px 0px 15px gold; } }
+
+@-moz-keyframes goldpulse {
+  0% {
+    box-shadow: inset 0px 0px 5px gold, 0px 0px 15px gold; }
+
+  50% {
+    box-shadow: inset 0px 0px 25px gold, 0px 0px 35px gold; }
+
+  100% {
+    box-shadow: inset 0px 0px 5px gold, 0px 0px 15px gold; } }
+
+@keyframes goldpulse {
+  0% {
+    box-shadow: inset 0px 0px 5px gold, 0px 0px 15px gold; }
+
+  50% {
+    box-shadow: inset 0px 0px 25px gold, 0px 0px 35px gold; }
+
+  100% {
+    box-shadow: inset 0px 0px 5px gold, 0px 0px 15px gold; } }
+
+i.fa-check {
+  color: green; }
+
+[contenteditable] {
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  outline: none;
   position: relative; }
-  div[contenteditable] .editable-affordance {
-    position: absolute;
-    right: 0;
-    top: 0;
-    font-size: 1em; }
+
+div[contenteditable] .editable-affordance {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 900;
+  color: #3d1c4f;
+  font-size: 1em;
+  border-radius: 15px;
+  padding: 5px;
+  -webkit-animation: darkpulse 2.5s infinite ease-in;
+  animation: darkpulse 2.5s infinite ease-in; }
 
 h1[contenteditable] {
   position: relative; }
   h1[contenteditable] .editable-affordance {
     position: absolute;
-    right: 0;
-    top: 0;
-    font-size: 0.5em; }
+    left: -0.5em;
+    top: -0.5em;
+    z-index: 900;
+    color: gold;
+    font-size: 0.5em;
+    border-radius: 15px;
+    padding: 5px;
+    -webkit-animation: goldpulse 2.5s infinite ease-in;
+    animation: goldpulse 2.5s infinite ease-in; }
 
 body header {
   height: 11.6em; }
