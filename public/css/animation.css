@@ -1,0 +1,59 @@
+@-webkit-keyframes darkpulse {
+  0% {
+    box-shadow: inset 0px 0px 5px #3d1c4f, 0px 0px 15px #3d1c4f; }
+
+  50% {
+    box-shadow: inset 0px 0px 15px #3d1c4f, 0px 0px 35px #3d1c4f; }
+
+  100% {
+    box-shadow: inset 0px 0px 5px #3d1c4f, 0px 0px 15px #3d1c4f; } }
+
+@-moz-keyframes darkpulse {
+  0% {
+    box-shadow: inset 0px 0px 5px #3d1c4f, 0px 0px 15px #3d1c4f; }
+
+  50% {
+    box-shadow: inset 0px 0px 15px #3d1c4f, 0px 0px 35px #3d1c4f; }
+
+  100% {
+    box-shadow: inset 0px 0px 5px #3d1c4f, 0px 0px 15px #3d1c4f; } }
+
+@keyframes darkpulse {
+  0% {
+    box-shadow: inset 0px 0px 5px #3d1c4f, 0px 0px 15px #3d1c4f; }
+
+  50% {
+    box-shadow: inset 0px 0px 15px #3d1c4f, 0px 0px 35px #3d1c4f; }
+
+  100% {
+    box-shadow: inset 0px 0px 5px #3d1c4f, 0px 0px 15px #3d1c4f; } }
+
+@-webkit-keyframes goldpulse {
+  0% {
+    box-shadow: inset 0px 0px 5px gold, 0px 0px 15px gold; }
+
+  50% {
+    box-shadow: inset 0px 0px 25px gold, 0px 0px 35px gold; }
+
+  100% {
+    box-shadow: inset 0px 0px 5px gold, 0px 0px 15px gold; } }
+
+@-moz-keyframes goldpulse {
+  0% {
+    box-shadow: inset 0px 0px 5px gold, 0px 0px 15px gold; }
+
+  50% {
+    box-shadow: inset 0px 0px 25px gold, 0px 0px 35px gold; }
+
+  100% {
+    box-shadow: inset 0px 0px 5px gold, 0px 0px 15px gold; } }
+
+@keyframes goldpulse {
+  0% {
+    box-shadow: inset 0px 0px 5px gold, 0px 0px 15px gold; }
+
+  50% {
+    box-shadow: inset 0px 0px 25px gold, 0px 0px 35px gold; }
+
+  100% {
+    box-shadow: inset 0px 0px 5px gold, 0px 0px 15px gold; } }

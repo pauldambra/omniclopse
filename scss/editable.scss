@@ -1,51 +1,5 @@
 @import 'colors';
-
-@mixin keyframes($animation-name) {
-  @-webkit-keyframes $animation-name {
-    @content;
-  }
-  @-moz-keyframes $animation-name {
-    @content;
-  }
-  @keyframes $animation-name {
-    @content;
-  }
-}
-
-@mixin animation($str) {
-  -webkit-animation: #{$str};
-  animation: #{$str};
-}
-
-@include keyframes(darkpulse) {
-  0% { 
-	box-shadow: inset 0px 0px 5px rgb(61,28,79),
-		0px 0px 15px rgb(61,28,79); 
-	}
-  50% { 
-  	box-shadow: inset 0px 0px 15px rgb(61,28,79), 
-  		0px 0px 35px rgb(61,28,79); 
-  }
-  100% {  
-  	box-shadow: inset 0px 0px 5px rgb(61,28,79), 
-  		0px 0px 15px rgb(61,28,79); 
-  	}
-}
-
-@include keyframes(goldpulse) {
-  0% { 
-  	box-shadow: inset 0px 0px 5px rgb(255,215,0), 	
-  		0px 0px 15px rgb(255,215,0); 
-  }
-  50% {
-  	box-shadow: inset 0px 0px 25px rgb(255,215,0), 
-  		0px 0px 35px rgb(255,215,0); 
-  }
-  100% {  
-  	box-shadow: inset 0px 0px 5px rgb(255,215,0),
-  		0px 0px 15px rgb(255,215,0); 
-  }
-}
+@import 'animation';
 
 @mixin editorAffordance($size, $pos, $glow) {
 	position: absolute;
@@ -80,7 +34,6 @@ div[contenteditable] {
 }
 
 h1[contenteditable] {
-	position:relative;
 	.editable-affordance{
     	@include editorAffordance(0.5em, -0.5em, gold);
     	@include animation('goldpulse 2.5s infinite ease-in');
