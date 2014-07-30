@@ -1,12 +1,13 @@
 (function(omniclopse) {
   'use strict';
 
+  omniclopse.ux = omniclopse.ux || {};
+
   var switchIcons = function(element, oldClass, newClass) {
     element.classList.remove(oldClass);
     element.classList.add(newClass);
   };
 
-  omniclopse.ux = omniclopse.ux || {};
   omniclopse.ux.saveContentStarted = function(element) {
     switchIcons(element, 'fa-pencil', 'fa-save');
   };
@@ -26,12 +27,8 @@
 (function(omniclopse, $) {
     'use strict';
     
-    omniclopse.onContentEdited = function(element) {
-      var icon = $(element).find("i")[0];
-      
-      omniclopse.ux.saveContentStarted(icon);
-
-      var panels = $('.panel').map(function(index, el) {
+    var getEditableElementsForUpload = function() {
+      return $('.panel').map(function(index, el) {
         var title = $(el).find('h1');
         var body = $(el).find('.panel-body');
         return {
@@ -39,6 +36,13 @@
           body: body? body.html() : ''
         };
       }).get();
+    };
+
+    omniclopse.onContentEdited = function(element) {
+      var icon = $(element).find('i')[0];
+      
+      omniclopse.ux.saveContentStarted(icon);
+      var panels = getEditableElementsForUpload();
 
       var putData = {'panels': panels};
       $.ajax({

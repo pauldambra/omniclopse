@@ -1,8 +1,6 @@
 (function(omniclopse, $, ckedit) {
     'use strict';
-    var startEdit = function(element) {
-      omniclopse.onContentEdited(element);
-    }
+
     //shamelessly borrowed from http://stackoverflow.com/a/14027188/222163
     omniclopse.bindEvents = function() {
 
@@ -13,7 +11,10 @@
         }).on('keyup paste', function() { 
           if (before != $(this).html()) { 
             clearTimeout(timer);
-            timer = setTimeout(startEdit($(this)[0]), 500);
+            var el = $(this)[0];
+            timer = setTimeout(function() {
+              omniclopse.onContentEdited(el);
+            }, 500);
           }
         });
 
